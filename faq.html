@@ -219,12 +219,13 @@
   </div>
 </footer>
 
-<!-- WeChat QR Modal 修复版，无alt -->
+<!-- WeChat QR Modal 修复版，图片自适应+加载失败提示 -->
 <div class="modal-overlay" id="qrModal" onclick="closeModalOutside(event)">
   <div class="modal-card" onclick="event.stopPropagation()">
     <h3 class="modal-title">添加微信</h3>
     <div class="modal-qr-frame">
-      <img src="qr.jpg">
+      <!-- 1. 增加加载失败文字提示 2. 图片自适应 -->
+      <img src="qr.jpg" onerror="this.parentElement.innerHTML='<p style=color:#999;font-size:13px>二维码图片缺失，请检查qr.jpg文件</p>'">
     </div>
     <p class="modal-hint">使用微信扫一扫，加我为好友</p>
     <button class="modal-close" onclick="closeModal()">关闭</button>
