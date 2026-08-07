@@ -1,389 +1,235 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>没带咖啡豆 · 宠物上门喂养</title>
-  <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: "Sarasa Gothic SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
-      background: #F8F3EC;
-      color: #2A1F14;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    /* ===== Header ===== */
-    .header {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 80px;
-      background: rgba(248, 243, 236, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(232, 220, 200, 0.6);
-    }
-    .logo-group {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .logo-icon svg { width: 36px; height: 36px; display: block; }
-    .logo-name {
-      font-size: 22px; font-weight: 600; color: #2A1F14;
-    }
-    .nav-links {
-      display: flex; align-items: center; gap: 40px;
-    }
-    .nav-links a {
-      font-size: 15px; color: #6B5B47;
-      transition: color 0.2s; position: relative;
-    }
-    .nav-links a:hover { color: #F4A261; }
-    .nav-links a.active { color: #F4A261; font-weight: 600; }
-
-    .header-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 24px;
-      background: #F4A261; color: #fff;
-      border-radius: 24px; font-size: 15px; font-weight: 600;
-      cursor: pointer; border: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .header-cta:hover { background: #e8924f; transform: scale(1.03); }
-    .header-cta svg { width: 16px; height: 16px; }
-
-    /* ===== Hero ===== */
-    .hero {
-      display: flex; flex-direction: column; align-items: center;
-      padding: 100px 80px 80px; gap: 28px; text-align: center;
-    }
-    .hero-badge {
-      display: inline-flex; padding: 8px 20px;
-      background: #B8C8A8; color: #2A1F14;
-      border-radius: 20px; font-size: 15px; font-weight: 600;
-    }
-    .hero-headline {
-      font-size: 56px; font-weight: 700; color: #2A1F14;
-      line-height: 1.3; max-width: 680px; white-space: pre-line;
-    }
-    .hero-subheadline {
-      font-size: 18px; color: #6B5B47;
-      line-height: 1.7; max-width: 560px; white-space: pre-line;
-    }
-    .hero-cta-group {
-      display: flex; gap: 16px; align-items: center;
-    }
-    .btn-primary {
-      padding: 16px 36px; background: #F4A261; color: #fff;
-      border-radius: 28px; font-size: 17px; font-weight: 600;
-      border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: #e8924f; transform: scale(1.03); }
-    .btn-secondary {
-      padding: 16px 36px; background: #fff; color: #6B5B47;
-      border: 1px solid #E8DCC8; border-radius: 28px;
-      font-size: 17px; font-weight: 600; cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-secondary:hover { border-color: #F4A261; color: #F4A261; }
-
-    .hero-image {
-      width: 100%; max-width: 1280px; height: 500px;
-      border-radius: 20px; overflow: hidden;
-      background: linear-gradient(135deg, #FAF6EE 0%, #F0E8D8 50%, #E8DCC8 100%);
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 8px;
-    }
-    .hero-image-placeholder {
-      font-size: 18px; color: #C4B8A4;
-      text-align: center; line-height: 1.8;
-    }
-
-    /* ===== About Section ===== */
-    .section {
-      padding: 80px 80px;
-    }
-    .section-label {
-      display: inline-flex; padding: 6px 18px;
-      background: #FAF6EE; border: 1px solid #E8DCC8;
-      border-radius: 20px; font-size: 13px; font-weight: 600;
-      color: #E07856; margin-bottom: 24px;
-    }
-    .section-title {
-      font-size: 36px; font-weight: 700; color: #2A1F14;
-      text-align: center; max-width: 680px; margin: 0 auto 40px;
-    }
-    .section-centered { display: flex; flex-direction: column; align-items: center; }
-
-    .about-content {
-      display: flex; gap: 60px; align-items: center; max-width: 1080px; margin: 0 auto;
-    }
-    .about-text-col { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-    .about-text-col p {
-      font-size: 16px; color: #6B5B47; line-height: 1.8;
-    }
-    .about-trust-badges {
-      display: flex; gap: 32px; flex-wrap: wrap; margin-top: 8px;
-    }
-    .trust-badge {
-      display: flex; align-items: center; gap: 10px; font-size: 14px; color: #6B5B47;
-    }
-    .trust-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .about-image {
-      width: 380px; height: 380px; border-radius: 20px; flex-shrink: 0;
-      background: linear-gradient(135deg, #FAF6EE, #E8DCC8);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    .about-image-placeholder {
-      font-size: 14px; color: #C4B8A4; text-align: center; padding: 20px;
-    }
-
-    /* ===== Services ===== */
-    .services-section { background: #fff; }
-    .pricing-cards {
-      display: flex; gap: 24px; max-width: 900px; margin: 0 auto;
-    }
-    .pricing-card {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      padding: 36px; gap: 24px;
-      background: #FAF6EE; border: 1px solid #E8DCC8;
-      border-radius: 16px; text-align: center;
-    }
-    .pricing-card h3 { font-size: 22px; font-weight: 700; color: #2A1F14; }
-    .price-row { display: flex; align-items: baseline; gap: 4px; }
-    .price-amount { font-size: 40px; font-weight: 800; color: #F4A261; }
-    .price-unit { font-size: 16px; color: #6B5B47; }
-    .price-distance {
-      font-size: 14px; color: #6B5B47; max-width: 260px; line-height: 1.6;
-    }
-    .feature-list {
-      display: flex; flex-direction: column; gap: 12px; width: 100%;
-    }
-    .feature-item {
-      display: flex; align-items: center; gap: 10px; font-size: 14px; color: #6B5B47;
-    }
-    .feature-item svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .pricing-cta {
-      width: 100%; padding: 14px 32px; background: #F4A261; color: #fff;
-      border-radius: 24px; font-size: 16px; font-weight: 600;
-      border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .pricing-cta:hover { background: #e8924f; transform: scale(1.02); }
-
-    /* ===== Reviews ===== */
-    .reviews-section { background: #FAF6EE; }
-    .review-cards {
-      display: flex; gap: 24px; max-width: 1080px; margin: 0 auto;
-    }
-    .review-card {
-      flex: 1; padding: 0; background: #fff;
-      border: 1px solid #E8DCC8; border-radius: 12px;
-      overflow: hidden; height: 380px;
-    }
-    .review-card img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-
-    /* ===== FAQ ===== */
-    .faq-section { background: #FAF6EE; }
-    .faq-list {
-      max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;
-    }
-    .faq-item {
-      padding: 24px; background: #fff;
-      border: 1px solid #E8DCC8; border-radius: 12px;
-    }
-    .faq-q {
-      font-size: 17px; font-weight: 700; color: #2A1F14; margin-bottom: 12px;
-    }
-    .faq-a { font-size: 15px; color: #6B5B47; line-height: 1.7; }
-
-    /* ===== Final CTA ===== */
-    .final-cta {
-      background: #F4A261; padding: 80px 80px;
-      display: flex; flex-direction: column; align-items: center; gap: 20px;
-    }
-    .final-cta h2 { font-size: 36px; font-weight: 700; color: #fff; text-align: center; }
-    .final-cta p { font-size: 18px; color: rgba(255,255,255,0.9); text-align: center; max-width: 500px; }
-    .final-cta .xhs-link {
-      display: inline-flex; padding: 16px 40px;
-      background: #fff; color: #F4A261;
-      border-radius: 28px; font-size: 17px; font-weight: 600;
-      transition: transform 0.15s;
-    }
-    .final-cta .xhs-link:hover { transform: scale(1.03); }
-
-    /* ===== Footer ===== */
-    .footer {
-      background: #2A1F14; padding: 28px 80px;
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .footer-main {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-tagline { font-size: 13px; color: #D6C8AE; }
-    .footer-copyright { font-size: 13px; color: #6B5B47; }
-
-    /* ===== QR Modal ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(20, 20, 30, 0.6);
-      display: none; align-items: center; justify-content: center;
-      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-    }
-    .modal-overlay.active { display: flex; }
-    .modal-card {
-      background: #fff; border-radius: 16px; padding: 32px 28px;
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
-      width: 340px; max-width: 90vw;
-    }
-    .modal-title { font-size: 18px; font-weight: 700; color: #18181A; }
-    .modal-qr-frame {
-      width: 220px; height: 220px; border-radius: 12px;
-      background: #F0F0F0; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-qr-placeholder {
-      text-align: center; font-size: 13px; color: #999; padding: 16px;
-    }
-    .modal-hint { font-size: 13px; color: #8C8C8C; }
-    .modal-close {
-      padding: 10px 32px; background: #F4A261; color: #fff;
-      border-radius: 20px; font-size: 14px; font-weight: 600;
-      border: none; cursor: pointer; margin-top: 4px;
-      transition: background 0.2s;
-    }
-    .modal-close:hover { background: #e8924f; }
-
-    /* ===== Process Steps ===== */
-    .process-section { background: #fff; }
-    .process-cards {
-      display: flex; gap: 24px; max-width: 1080px; margin: 0 auto;
-    }
-    .process-card {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      padding: 32px; gap: 16px;
-      background: #FAF6EE; border-radius: 16px; text-align: center;
-    }
-    .step-num {
-      width: 48px; height: 48px; border-radius: 24px;
-      background: #F4A261; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 700;
-    }
-    .process-card h4 { font-size: 20px; font-weight: 700; color: #2A1F14; }
-    .process-card p { font-size: 14px; color: #6B5B47; line-height: 1.6; }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 900px) {
-      .header { flex-wrap: wrap; padding: 16px 24px; gap: 12px; }
-      .nav-links { gap: 20px; }
-      .hero { padding: 60px 24px 40px; }
-      .hero-headline { font-size: 32px; }
-      .hero-image { height: 250px; }
-      .section { padding: 60px 24px; }
-      .section-title { font-size: 28px; }
-      .about-content { flex-direction: column; }
-      .about-image { width: 100%; height: 280px; }
-      .pricing-cards, .review-cards, .process-cards { flex-direction: column; }
-      .footer { padding: 24px; }
-      .footer-main { flex-direction: column; gap: 12px; text-align: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <!-- 移动端自适应适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 网站标题 -->
+    <title>没带咖啡豆 - 宠物上门喂养个人站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #F5F5F5;
+            color: #222;
+        }
+        /* ========== 导航栏样式 ========== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 12%;
+        }
+        .logo {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .nav-links a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+        .nav-cta {
+            background: #f2b263;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        /* ========== 首页主视觉区域 ========== */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .tag {
+            background: #d8e2d0;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        .desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .btn-group button {
+            padding: 12px 28px;
+            border-radius: 30px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 0 6px;
+        }
+        .btn-orange {
+            background: #f2b263;
+        }
+        .btn-white {
+            background: #fff;
+            border: 1px solid #ddd !important;
+        }
+        .pet-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        /* ========== 【核心修复】微信弹窗全套样式，解决图片被裁切、看不见问题 ========== */
+        /* 弹窗遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            /* 默认隐藏弹窗 */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            /* 最高层级，不会被页面其他元素盖住 */
+            z-index: 9999;
+        }
+        /* 弹窗白色卡片容器 */
+        .modal-card {
+            background: #ffffff;
+            padding: 28px;
+            border-radius: 14px;
+            max-width: 320px;
+            width: 90%;
+        }
+        /* 弹窗标题 */
+        .modal-title {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        /* 二维码外层容器，禁止裁切溢出图片、居中 */
+        .modal-qr-frame {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0;
+            /* 关键修复：取消溢出隐藏，不会把二维码裁掉 */
+            overflow: visible !important;
+        }
+        /* 二维码图片样式 */
+        .modal-qr-frame img {
+            width: 160px;
+            border-radius: 8px;
+            display: block;
+        }
+        /* 弹窗提示文字 */
+        .modal-hint {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        /* 关闭按钮 */
+        .modal-close {
+            display: block;
+            margin: 0 auto;
+            padding: 8px 22px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        /* ========== 关于我板块 ========== */
+        #about {
+            max-width: 720px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Header -->
-<header class="header" id="header">
-  <a href="index.html" class="logo-group">
-    <span class="logo-icon">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="18" cy="18" rx="11" ry="13" fill="#C4956A" stroke="#2A1F14" stroke-width="1.2" transform="rotate(15 18 18)"/>
-        <path d="M18 7 Q20 18 18 29" stroke="#2A1F14" stroke-width="1.5" fill="none" transform="rotate(15 18 18)"/>
-        <path d="M9 10 L17 13" stroke="#2A1F14" stroke-width="2.8" stroke-linecap="round"/>
-        <path d="M19 11 L27 11" stroke="#2A1F14" stroke-width="2.8" stroke-linecap="round"/>
-        <circle cx="13" cy="17" r="1.5" fill="#2A1F14"/>
-        <circle cx="23" cy="17" r="1.5" fill="#2A1F14"/>
-        <path d="M13 23 Q18 27.5 23 23" stroke="#2A1F14" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-      </svg>
-    </span>
-    <span class="logo-name">没带咖啡豆</span>
-  </a>
-  <nav class="nav-links">
-    <a href="index.html" class="active">首页</a>
-    <a href="about.html">关于我</a>
-    <a href="services.html">服务介绍</a>
-    <a href="faq.html">FAQ</a>
-  </nav>
-  <button class="header-cta" onclick="openModal()">
-    <svg viewBox="0 0 16 16" fill="none"><path d="M1.333 2.667L11.98 9.667 9.333 9.333 6 12.667 13.333 5.333 12 2.667 6 9.333l-3.333.667L1.333 2.667z" stroke="#fff" stroke-width="1.2" fill="none"/></svg>
-    预约喂养
-  </button>
+<!-- 顶部导航栏 -->
+<header>
+    <div class="logo">没带咖啡豆</div>
+    <div class="nav-links">
+        <a href="#service">服务介绍</a>
+        <a href="#flow">服务流程</a>
+        <a href="#review">客户评价</a>
+        <a href="#price">价格</a>
+    </div>
+    <!-- 顶部预约按钮，点击唤起二维码弹窗 -->
+    <button class="nav-cta" onclick="openModal()">预约喂养</button>
 </header>
 
-<!-- Hero -->
+<!-- 首屏主视觉区域 -->
 <section class="hero">
-  <div class="hero-badge">猫狗小宠 · 上门喂养</div>
-  <h1 class="hero-headline">远行不必牵挂
-毛孩子自有温柔守候</h1>
-  <p class="hero-subheadline">出差、出游不再焦虑，放心把毛孩子交给我。
-上门投喂、互动玩耍、户外遛弯，
-替你守护毛孩子，让他们过得舒心快乐。</p>
-  <div class="hero-cta-group">
-    <button class="btn-primary" onclick="openModal()">立即预约</button>
-    <a href="about.html" class="btn-secondary">了解我</a>
-  </div>
-  <div class="hero-image">
-    <p class="hero-image-placeholder">🐱 温馨的宠物居家场景 🐶<br><small>—— 让毛孩子在家也能被温柔以待 ——</small></p>
-  </div>
+    <span class="tag">宠物小屋 · 上门喂养</span>
+    <h1>远行不必牵挂<br>毛孩子自有温柔守候</h1>
+    <div class="desc">
+        出差、出游不再焦虑，放心把毛孩子交给我。<br>
+        上门投喂、互动玩耍、户外遛弯，<br>
+        替你守护毛孩子，让他们过得舒心快乐。
+    </div>
+    <div class="btn-group">
+        <!-- 立即预约：打开微信二维码弹窗 -->
+        <button class="btn-orange" onclick="openModal()">立即预约</button>
+        <!-- 了解我：平滑滚动到关于我板块 -->
+        <button class="btn-white" onclick="jumpAbout()">了解我</button>
+    </div>
+    <!-- 猫狗首页大图，替换成你的猫狗简笔画图 -->
+    <img class="pet-img" src="pet.jpg" alt="猫狗陪伴">
 </section>
 
-<!-- About Preview -->
-<section class="section section-centered" style="background:#fff;">
-  <span class="section-label">关于我</span>
-  <h2 class="section-title">你好，我是那个「没带咖啡豆」的人</h2>
-  <div style="max-width:680px;text-align:center;margin:0 auto;">
-    <p style="font-size:16px;color:#6B5B47;line-height:1.8;">
-      暹罗、橘猫、拉布拉多、豚鼠、小乌龟…… 各式各样的小动物都陪伴过我。
-      如今我暂时没有毛孩子，只想等拥有足够能力，能给Ta一个温馨舒适的家。
-    </p>
-  </div>
-  <a href="about.html" class="btn-secondary" style="margin-top:28px;display:inline-flex;">了解更多 →</a>
+<!-- 关于我页面锚点区域 -->
+<section id="about">
+    <h2>关于我｜没带咖啡豆</h2>
+    <p>你好，我是「没带咖啡豆」，INFJ处女座。
+我养过不少小动物：暹罗、橘猫、奶牛猫，拉布拉多、哈士奇、马犬，还有豚鼠、小鸟、乌龟等等。目前没有饲养宠物，是我希望等自身条件更稳定后，再给未来的小家伙安稳优质的生活，现阶段一直在为此努力。
+
+2022至2025年，我在加拿大多伦多做了三年上门喂宠与宠物寄养。这段经历让我真切明白，毛孩子早已是很多人不可或缺的家人。当地成熟完善的宠物配套，能让主人安心兼顾宠物的情绪与生活。反观国内相关保障尚不完善，很多铲屎官出门在外时满心牵挂，却找不到靠谱可靠的照料人。
+正因如此，我想尽自己微薄之力，成为大家值得信赖的帮手。主人不在身边时，用心照顾陪伴毛孩子，替各位铲屎官卸下一份担忧。</p>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-main">
-    <span class="footer-tagline">温柔对待每个毛孩子</span>
-    <span class="footer-copyright">&copy; 2026 没带咖啡豆. All rights reserved.</span>
-  </div>
-</footer>
-
+<!-- ====================== 微信二维码弹窗模块（已修复裁切bug，无alt文字） ====================== -->
 <!-- WeChat QR Modal -->
 <div class="modal-overlay" id="qrModal" onclick="closeModalOutside(event)">
   <div class="modal-card" onclick="event.stopPropagation()">
     <h3 class="modal-title">添加微信</h3>
     <div class="modal-qr-frame">
-      <img src="qr.jpg" style="width:160px;border-radius:8px;">
+      <!-- 图片路径：根目录qr.jpg，已移除alt属性 -->
+      <img src="qr.jpg" style="width:160px;border-radius:8px;display:block;">
     </div>
     <p class="modal-hint">使用微信扫一扫，加我为好友</p>
     <button class="modal-close" onclick="closeModal()">关闭</button>
   </div>
 </div>
 
+<!-- JS交互脚本：弹窗开关、页面滚动跳转 -->
 <script>
-function openModal() { document.getElementById('qrModal').classList.add('active'); }
-function closeModal() { document.getElementById('qrModal').classList.remove('active'); }
-function closeModalOutside(e) { if (e.target === e.currentTarget) closeModal(); }
+// 打开微信预约弹窗
+function openModal(){
+    document.getElementById('qrModal').style.display = 'flex';
+}
+// 点击关闭按钮关闭弹窗
+function closeModal(){
+    document.getElementById('qrModal').style.display = 'none';
+}
+// 点击弹窗黑色遮罩区域关闭弹窗（不点击卡片内部不会关闭）
+function closeModalOutside(e){
+    if(e.target.id === 'qrModal'){
+        closeModal();
+    }
+}
+// 平滑滚动到关于我板块
+function jumpAbout(){
+    document.getElementById('about').scrollIntoView({behavior:'smooth'})
+}
 </script>
-
 </body>
 </html>
