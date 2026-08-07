@@ -59,8 +59,9 @@
     .pricing-cards {
       display: flex; gap: 24px; max-width: 960px; margin: 0 auto;
     }
+    /* 卡片宽度放大一倍，固定宽度420px，不再均分 */
     .pricing-card {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
+      width: 420px; display: flex; flex-direction: column; align-items: center;
       padding: 40px 36px; gap: 24px;
       background: #FAF6EE; border: 1px solid #E8DCC8;
       border-radius: 16px; text-align: center;
@@ -113,6 +114,7 @@
     .footer-tagline { font-size: 13px; color: #D6C8AE; }
     .footer-copyright { font-size: 13px; color: #6B5B47; }
 
+    /* 二维码弹窗统一修复，和首页/关于页一致，无裁切 */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 200;
       background: rgba(20, 20, 30, 0.6);
@@ -128,11 +130,14 @@
     }
     .modal-title { font-size: 18px; font-weight: 700; color: #18181A; }
     .modal-qr-frame {
-      width: 220px; height: 220px; border-radius: 12px;
-      background: #F0F0F0; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
+      padding: 12px;
     }
-    .modal-qr-placeholder { text-align: center; font-size: 13px; color: #999; padding: 16px; }
+    .modal-qr-frame img {
+      width: 180px;
+      border-radius: 12px;
+      display: block;
+    }
     .modal-hint { font-size: 13px; color: #8C8C8C; }
     .modal-close {
       padding: 10px 32px; background: #F4A261; color: #fff;
@@ -147,7 +152,16 @@
       .nav-links { gap: 20px; }
       .section { padding: 60px 24px; }
       .section-title { font-size: 28px; }
-      .pricing-cards, .review-cards { flex-direction: column; }
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      /* 移动端卡片自适应100%宽度 */
+      .pricing-card {
+        width: 100%;
+        max-width: 420px;
+      }
+      .review-cards { flex-direction: column; }
       .footer { padding: 24px; }
       .footer-main { flex-direction: column; gap: 12px; text-align: center; }
     }
@@ -250,19 +264,19 @@
   </div>
 </section>
 
-<!-- Reviews Section -->
+<!-- Reviews Section 图片路径已修正 -->
 <section class="section reviews-section section-centered">
   <span class="section-label">客户评价</span>
   <h2 class="section-title">来自微信的真实反馈</h2>
   <div class="review-cards">
     <div class="review-card">
-      <img src="images/review1.jpg" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将评价图片放入 images/ 目录</small></p>'">
+      <img src="images/review1.jpg" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将 review1.jpg 放入 images 文件夹</small></p>'">
     </div>
     <div class="review-card">
-      <img src="images/review2.jpg" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将评价图片放入 images/ 目录</small></p>'">
+      <img src="images/review2.png" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将 review2.png 放入 images 文件夹</small></p>'">
     </div>
     <div class="review-card">
-      <img src="images/review3.png" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将评价图片放入 images/ 目录</small></p>'">
+      <img src="images/review3.png" alt="客户评价截图" onerror="this.parentElement.innerHTML='<p style=padding:40px;text-align:center;color:#999;>📱 客户评价截图<br><small>请将 review3.png 放入 images 文件夹</small></p>'">
     </div>
   </div>
 </section>
@@ -274,12 +288,12 @@
   </div>
 </footer>
 
-<!-- WeChat QR Modal -->
+<!-- WeChat QR Modal 适配图片qr.jpg -->
 <div class="modal-overlay" id="qrModal" onclick="closeModalOutside(event)">
   <div class="modal-card" onclick="event.stopPropagation()">
     <h3 class="modal-title">添加微信</h3>
     <div class="modal-qr-frame">
-      <p class="modal-qr-placeholder">微信二维码<br><small>请替换为您的二维码图片</small></p>
+      <img src="qr.jpg">
     </div>
     <p class="modal-hint">使用微信扫一扫，加我为好友</p>
     <button class="modal-close" onclick="closeModal()">关闭</button>
