@@ -81,24 +81,6 @@
       font-size: 15px; color: #B4A894; text-align: center; padding: 30px; line-height: 1.8;
     }
 
-    .process-section { background: #fff; }
-    .process-cards {
-      display: flex; gap: 24px; max-width: 1080px; margin: 0 auto;
-    }
-    .process-card {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      padding: 32px; gap: 16px;
-      background: #FAF6EE; border-radius: 16px; text-align: center;
-    }
-    .step-num {
-      width: 48px; height: 48px; border-radius: 24px;
-      background: #F4A261; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 700;
-    }
-    .process-card h4 { font-size: 20px; font-weight: 700; color: #2A1F14; }
-    .process-card p { font-size: 14px; color: #6B5B47; line-height: 1.6; }
-
     .footer {
       background: #2A1F14; padding: 28px 80px;
       display: flex; flex-direction: column; gap: 20px;
@@ -214,34 +196,7 @@
   </div>
 </section>
 
-<!-- Process Steps -->
-<section class="section process-section section-centered">
-  <span class="section-label">服务流程</span>
-  <h2 class="section-title">简单四步，安心托付</h2>
-  <div class="process-cards">
-    <div class="process-card">
-      <div class="step-num">1</div>
-      <h4>在线预约</h4>
-      <p>告诉我你家毛孩子的品种、性格、饮食习惯和时间需求</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">2</div>
-      <h4>上门认识</h4>
-      <p>第一次免费上门，让毛孩子熟悉我，确认钥匙交接和注意事项</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">3</div>
-      <h4>日常喂养</h4>
-      <p>喂食、换水、铲屎、遛狗、陪玩，按你最熟悉的方式照顾它们</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">4</div>
-      <h4>安心反馈</h4>
-      <p>每次服务后拍照+小日记发给你，让远方的你也像陪在它们身边</p>
-    </div>
-  </div>
-</section>
-
+<!-- Footer -->
 <footer class="footer">
   <div class="footer-main">
     <span class="footer-tagline">温柔对待每个毛孩子</span>
@@ -249,12 +204,12 @@
   </div>
 </footer>
 
-<!-- WeChat QR Modal -->
+<!-- WeChat QR Modal 修复版，无alt -->
 <div class="modal-overlay" id="qrModal" onclick="closeModalOutside(event)">
   <div class="modal-card" onclick="event.stopPropagation()">
     <h3 class="modal-title">添加微信</h3>
     <div class="modal-qr-frame">
-      <p class="modal-qr-placeholder">微信二维码<br><small>请替换为您的二维码图片</small></p>
+      <img src="qr.jpg">
     </div>
     <p class="modal-hint">使用微信扫一扫，加我为好友</p>
     <button class="modal-close" onclick="closeModal()">关闭</button>
