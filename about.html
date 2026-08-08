@@ -135,9 +135,8 @@
     }
     .modal-close:hover { background: #e8924f; }
 
-    /* ========== 新增手机端响应式代码（和首页保持一致） ========== */
+    /* ========== 手机端响应式适配 ========== */
     @media (max-width: 900px) {
-      /* 导航栏自适应换行 */
       .header {
         flex-wrap: wrap;
         padding: 16px 24px;
@@ -149,26 +148,21 @@
         justify-content: center;
         gap: 20px;
       }
-      /* 区块内边距缩小 */
       .section {
         padding: 60px 24px;
       }
-      /* 标题缩小 */
       .section-title {
         font-size: 28px;
       }
-      /* 图文改为上下垂直排列，取消横向并排 */
       .about-content {
         flex-direction: column;
         gap: 36px;
       }
-      /* 手机取消图片固定sticky，避免遮挡 */
       .about-image {
         width: 100%;
         height: 320px;
         position: static;
       }
-      /* 页脚垂直居中 */
       .footer {
         padding: 24px;
       }
@@ -214,9 +208,22 @@
 
   <div class="about-content">
     <div class="about-text-col">
-      <p>这里是文字内容区域</p>
+      <!-- 完整补充你的个人介绍文案 -->
+      <p>曾在🇨🇦多伦多做了三年上门喂养与寄养，我深刻体会到毛孩子在人们生活里家人般的重量。当地完整的宠物保障体系，能让主人无忧照料爱宠；而国内不少养宠人离家后，相比较而言会有更多的顾虑。</p>
+      <p>我想以自身经验与耐心，做铲屎官可以托付的人，在他们无法陪伴的时候，好好守护每一只毛孩子。</p>
+      <!-- 补充信任资质标签 -->
+      <div class="about-trust-badges">
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="#F4A261"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span>3年喂养经验</span>
+        </div>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="#F4A261"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <span>实名认证+全程报备</span>
+        </div>
+      </div>
     </div>
-    <!-- 替换me.png人像图，无多余占位文字 -->
+    <!-- 替换me.png人像图 -->
     <div class="about-image">
       <img src="me.png" alt="喂养人形象" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
     </div>
