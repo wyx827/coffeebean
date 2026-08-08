@@ -28,7 +28,7 @@
     .logo-group {
       display: flex; align-items: center; gap: 12px;
     }
-    .logo-icon svg { width: 36px; height: 36px; display: block; }
+    .logo-icon img { width: 36px; height: 36px; object-fit: contain; display: block; }
     .logo-name {
       font-size: 22px; font-weight: 600; color: #2A1F14;
     }
@@ -134,21 +134,57 @@
       transition: background 0.2s;
     }
     .modal-close:hover { background: #e8924f; }
+
+    /* ========== 新增手机端响应式代码（和首页保持一致） ========== */
+    @media (max-width: 900px) {
+      /* 导航栏自适应换行 */
+      .header {
+        flex-wrap: wrap;
+        padding: 16px 24px;
+        gap: 12px;
+      }
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+      }
+      /* 区块内边距缩小 */
+      .section {
+        padding: 60px 24px;
+      }
+      /* 标题缩小 */
+      .section-title {
+        font-size: 28px;
+      }
+      /* 图文改为上下垂直排列，取消横向并排 */
+      .about-content {
+        flex-direction: column;
+        gap: 36px;
+      }
+      /* 手机取消图片固定sticky，避免遮挡 */
+      .about-image {
+        width: 100%;
+        height: 320px;
+        position: static;
+      }
+      /* 页脚垂直居中 */
+      .footer {
+        padding: 24px;
+      }
+      .footer-main {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 <header class="header">
   <a href="index.html" class="logo-group">
     <span class="logo-icon">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="18" cy="18" rx="11" ry="13" fill="#C4956A" stroke="#2A1F14" stroke-width="1.2" transform="rotate(15 18 18)"/>
-        <path d="M18 7 Q20 18 18 29" stroke="#2A1F14" stroke-width="1.5" fill="none" transform="rotate(15 18 18)"/>
-        <path d="M9 10 L17 13" stroke="#2A1F14" stroke-width="2.8" stroke-linecap="round"/>
-        <path d="M19 11 L27 11" stroke="#2A1F14" stroke-width="2.8" stroke-linecap="round"/>
-        <circle cx="13" cy="17" r="1.5" fill="#2A1F14"/>
-        <circle cx="23" cy="17" r="1.5" fill="#2A1F14"/>
-        <path d="M13 23 Q18 27.5 23 23" stroke="#2A1F14" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-      </svg>
+      <img src="cb_logo.png">
     </span>
     <span class="logo-name">没带咖啡豆</span>
   </a>
@@ -167,36 +203,26 @@
 <!-- About Preview -->
 <section class="section section-centered">
   <span class="section-label">关于我</span>
-  <h1 class="section-title">你好，我是「没带咖啡豆」，INFJ 处女座</h1>
+  <h2 class="section-title">你好，我是「没带咖啡豆」，INFJ 处女座</h2>
+
+  <div style="max-width:680px;text-align:center;margin:0 auto;">
+    <p style="font-size:16px;color:#6B5B47;line-height:1.8;">
+      暹罗、橘猫、拉布拉多、豚鼠、小乌龟…… 各式各样的小动物都陪伴过我。
+      如今我暂时没有毛孩子，只想等拥有足够能力，能给Ta一个温馨舒适的家。
+    </p>
+  </div>
 
   <div class="about-content">
     <div class="about-text-col">
-      <p>
-        暹罗、橘猫、拉布拉多、豚鼠、小乌龟…… 各式各样的小动物都陪伴过我。如今我暂时没有毛孩子，只想等拥有足够能力，能给Ta一个温馨舒适的家。
-      </p>
-      <p>
-        曾在🇨🇦多伦多做了三年上门喂养与寄养，我深刻体会到毛孩子在人们生活里家人般的重量。当地完整的宠物保障体系，能让主人无忧照料爱宠；而国内不少养宠人离家后，相比较而言会有更多的顾虑。
-      </p>
-      <p>
-        我想以自身经验与耐心，做铲屎官可以托付的人，在他们无法陪伴的时候，好好守护每一只毛孩子。
-      </p>
-      <div class="about-trust-badges">
-        <div class="trust-badge">
-          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#B8C8A8"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          3年喂养经验
-        </div>
-        <div class="trust-badge">
-          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#B8C8A8"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          实名认证+全程报备
-        </div>
-      </div>
+      <p>这里是文字内容区域</p>
     </div>
+    <!-- 替换me.png人像图，无多余占位文字 -->
     <div class="about-image">
-      <p class="about-image-text">🐾<br>在加拿大多伦多<br>陪伴过的毛孩子们<br><small>—— 每一只都是家人 ——</small></p>
+      <img src="me.png" alt="喂养人形象" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
     </div>
   </div>
 </section>
-
+  
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-main">
