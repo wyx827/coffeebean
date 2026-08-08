@@ -65,33 +65,33 @@
       font-size: 36px; font-weight: 700; color: #2A1F14;
       text-align: center; max-width: 680px; margin: 0 auto 40px;
     }
-
+    
     .about-content {
-      display: flex; gap: 60px; align-items: flex-start;
-      max-width: 1080px; margin: 0 auto;
+      display: flex; gap: 40px; align-items: flex-start;
+      max-width: 1180px; margin: 0 auto;
     }
-    .about-text-col { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+    .about-text-col { flex: 1; display: flex; flex-direction: column; gap: 18px; }
     .about-text-col p {
-      font-size: 16px; color: #6B5B47; line-height: 1.85;
+      font-size: 16px; color: #6B5B47; line-height: 1.8;
     }
     .about-trust-badges {
-      display: flex; gap: 32px; flex-wrap: wrap; margin-top: 8px; padding-top: 8px;
+      display: flex; gap: 36px; flex-wrap: wrap; margin-top: 32px; padding-top: 20px;
       border-top: 1px solid #E8DCC8;
     }
     .trust-badge {
       display: flex; align-items: center; gap: 10px; font-size: 14px; color: #6B5B47;
     }
     .trust-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
+    /* 核心改动：缩小图片尺寸、移除桌面端悬浮sticky定位，解决图片过大挤压文字 */
     .about-image {
-      width: 400px; height: 480px; border-radius: 20px; flex-shrink: 0;
+      width: 300px; height: 360px; border-radius: 20px; flex-shrink: 0;
       background: linear-gradient(160deg, #FAF6EE 0%, #F0E8D8 40%, #E8DCC8 100%);
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden; position: sticky; top: 120px;
+      overflow: hidden;
     }
     .about-image-text {
       font-size: 15px; color: #B4A894; text-align: center; padding: 30px; line-height: 1.8;
     }
-
     .footer {
       background: #2A1F14; padding: 28px 80px;
       display: flex; flex-direction: column; gap: 20px;
@@ -155,13 +155,14 @@
         font-size: 28px;
       }
       .about-content {
-        flex-direction: column;
-        gap: 36px;
+       flex-direction: column;
+       align-items: center;
       }
       .about-image {
         width: 100%;
-        height: 320px;
-        position: static;
+        max-width: 360px;
+        height: auto;
+        aspect-ratio: 5/6;
       }
       .footer {
         padding: 24px;
@@ -199,28 +200,26 @@
   <span class="section-label">关于我</span>
   <h2 class="section-title">你好，我是「没带咖啡豆」，INFJ 处女座</h2>
 
-  <div class="intro-desc">
-    <p>
-      暹罗、橘猫、拉布拉多、豚鼠、小乌龟…… 各式各样的小动物都陪伴过我。
-      如今我暂时没有毛孩子，只想等拥有足够能力，能给Ta一个温馨舒适的家。
-    </p>
-  </div>
-
   <div class="about-content">
     <div class="about-text-col">
+      <p>暹罗、橘猫、拉布拉多、豚鼠、小乌龟…… 各式各样的小动物都陪伴过我。如今我暂时没有毛孩子，只想等拥有足够能力，能给Ta一个温馨舒适的家。</p>
       <p>曾在🇨🇦多伦多做了三年上门喂养与寄养，我深刻体会到毛孩子在人们生活里家人般的重量。当地完整的宠物保障体系，能让主人无忧照料爱宠；而国内不少养宠人离家后，相比较而言会有更多的顾虑。</p>
       <p>我想以自身经验与耐心，做铲屎官可以托付的人，在他们无法陪伴的时候，好好守护每一只毛孩子。</p>
-      <div class="about-trust-badges">
-        <div class="trust-badge">
-          <svg viewBox="0 0 24 24" fill="#F4A261"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span>3年喂养经验</span>
-        </div>
-        <div class="trust-badge">
-          <svg viewBox="0 0 24 24" fill="#F4A261"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <span>实名认证+全程报备</span>
+      <!-- 资质分割线+标签 -->
+      <div style="margin-top:32px; padding-top:20px; border-top:1px solid #E8DCC8;">
+        <div class="about-trust-badges">
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="#F4A261" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span>3年喂养经验</span>
+          </div>
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="#F4A261" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span>实名认证+全程报备</span>
+          </div>
         </div>
       </div>
     </div>
+    <!-- 缩小后的图片容器 -->
     <div class="about-image">
       <img src="me.png" alt="喂养人形象" style="width:100%;height:100%;object-fit:cover;">
     </div>
