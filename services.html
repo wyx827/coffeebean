@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>服务介绍 · 没带咖啡豆</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Sarasa Gothic SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+      background: #F8F3EC; color: #2A1F14; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 80px;
+      background: rgba(248, 243, 236, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 220, 200, 0.6);
+    }
+    .logo-group { display: flex; align-items: center; gap: 12px; }
+    .logo-icon img { width: 36px; height: 36px; object-fit: contain; display: block; }
+    .logo-name { font-size: 22px; font-weight: 600; color: #2A1F14; }
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-links a { font-size: 15px; color: #6B5B47; transition: color 0.2s; }
+    .nav-links a:hover { color: #F4A261; }
+    .nav-links a.active { color: #F4A261; font-weight: 600; }
+
+    .header-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 24px; background: #F4A261; color: #fff;
+      border-radius: 24px; font-size: 15px; font-weight: 600;
+      cursor: pointer; border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .header-cta:hover { background: #e8924f; transform: scale(1.03); }
+    .header-cta svg { width: 16px; height: 16px; }
+
+    .section { padding: 80px 80px; }
+    .section-centered { display: flex; flex-direction: column; align-items: center; }
+    .section-label {
+      display: inline-flex; padding: 6px 18px;
+      background: #FAF6EE; border: 1px solid #E8DCC8;
+      border-radius: 20px; font-size: 13px; font-weight: 600;
+      color: #E07856; margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 36px; font-weight: 700; color: #2A1F14;
+      text-align: center; max-width: 680px; margin: 0 auto 40px;
+    }
+
+    .pricing-section { background: #fff; }
+    .pricing-cards {
+      display: flex; gap: 24px; max-width: 960px; margin: 0 auto;
+    }
+    /* 卡片宽度放大一倍，固定宽度420px，不再均分 */
+    .pricing-card {
+      width: 420px; display: flex; flex-direction: column; align-items: center;
+      padding: 40px 36px; gap: 24px;
+      background: #FAF6EE; border: 1px solid #E8DCC8;
+      border-radius: 16px; text-align: center;
+    }
+    .pricing-card h3 { font-size: 24px; font-weight: 700; color: #2A1F14; }
+    .price-row { display: flex; align-items: baseline; gap: 4px; }
+    .price-amount { font-size: 44px; font-weight: 800; color: #F4A261; }
+    .price-unit { font-size: 16px; color: #6B5B47; }
+    .price-distance {
+      font-size: 14px; color: #6B5B47; line-height: 1.7;
+      padding: 8px 0; border-top: 1px solid #E8DCC8; border-bottom: 1px solid #E8DCC8;
+      width: 100%;
+    }
+    .price-distance strong { color: #2A1F14; }
+    .feature-list {
+      display: flex; flex-direction: column; gap: 12px; width: 100%;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: 10px; font-size: 15px; color: #6B5B47; text-align: left;
+    }
+    .feature-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .pricing-cta {
+      width: 100%; padding: 14px 32px; background: #F4A261; color: #fff;
+      border-radius: 24px; font-size: 16px; font-weight: 600;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .pricing-cta:hover { background: #e8924f; transform: scale(1.02); }
+
+    .reviews-section { background: #FAF6EE; }
+    .review-cards {
+      display: flex; gap: 24px; max-width: 1080px; margin: 0 auto;
+    }
+    .review-card {
+      flex: 1; padding: 0; background: #fff;
+      border: 1px solid #E8DCC8; border-radius: 12px;
+      overflow: hidden; height: 400px;
+    }
+    .review-card img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+
+    .footer {
+      background: #2A1F14; padding: 28px 80px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .footer-main {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-tagline { font-size: 13px; color: #D6C8AE; }
+    .footer-copyright { font-size: 13px; color: #6B5B47; }
+
+    /* 二维码弹窗统一修复，和首页/关于页一致，无裁切 */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(20, 20, 30, 0.6);
+      display: none; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: #fff; border-radius: 16px; padding: 32px 28px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      width: 340px; max-width: 90vw;
+    }
+    .modal-title { font-size: 18px; font-weight: 700; color: #18181A; }
+    .modal-qr-frame {
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px;
+    }
+    .modal-qr-frame img {
+      width: 180px;
+      border-radius: 12px;
+      display: block;
+    }
+    .modal-hint { font-size: 13px; color: #8C8C8C; }
+    .modal-close {
+      padding: 10px 32px; background: #F4A261; color: #fff;
+      border-radius: 20px; font-size: 14px; font-weight: 600;
+      border: none; cursor: pointer; margin-top: 4px;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: #e8924f; }
+
+    /* ===== Custom Pet Cursor ===== */
+    body { cursor: url('cat1.png') 24 24, auto; }
+    body.cursor-dog,
+    body.cursor-dog a,
+    body.cursor-dog button { cursor: url('dog1.png') 24 24, auto; }
+
+    @media (max-width: 900px) {
+      .header { flex-wrap: wrap; padding: 16px 24px; gap: 12px; }
+      .nav-links { gap: 20px; }
+      .section { padding: 60px 24px; }
+      .section-title { font-size: 28px; }
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      /* 移动端卡片自适应100%宽度 */
+      .pricing-card {
+        width: 100%;
+        max-width: 420px;
+      }
+      .review-cards { flex-direction: column; }
+      .footer { padding: 24px; }
+      .footer-main { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo-group">
+    <span class="logo-icon">
+      <img src="cb_logo.png">
+    </span>
+    <span class="logo-name">没带咖啡豆</span>
+  </a>
+  <nav class="nav-links">
+    <a href="index.html">首页</a>
+    <a href="about.html">关于我</a>
+    <a href="services.html" class="active">服务介绍</a>
+    <a href="faq.html">FAQ</a>
+  </nav>
+  <button class="header-cta" onclick="openModal()">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M1.333 2.667L11.98 9.667 9.333 9.333 6 12.667 13.333 5.333 12 2.667 6 9.333l-3.333.667L1.333 2.667z" stroke="#fff" stroke-width="1.2" fill="none"/></svg>
+    预约喂养
+  </button>
+</header>
+
+<!-- Pricing Section -->
+<section class="section pricing-section section-centered">
+  <span class="section-label">费用表</span>
+  <h1 class="section-title">简单透明，没有隐藏费用</h1>
+
+  <div class="pricing-cards">
+    <!-- Cat Card -->
+    <div class="pricing-card">
+      <h3 style="display:flex;align-items:center;gap:10px;">
+        <img src="cat.png" alt="猫咪图标" style="width:36px;height:36px;object-fit:contain;background:none;mix-blend-mode:multiply;image-rendering:crisp-edges;">
+        猫咪上门
+      </h3>
+      <div class="price-row">
+        <span class="price-amount">¥30</span>
+        <span class="price-unit">起 / 次</span>
+      </div>
+      <div class="price-distance">
+        3公里内 <strong>¥30</strong><br>
+        3-5公里 <strong>¥40</strong><br>
+        5-6公里 <strong>¥50</strong><br>
+        加一只猫 <strong>+¥5</strong>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          喂水、喂食
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          清洁（猫砂盆、碗）
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          陪玩、拍照&amp;视频
+        </div>
+      </div>
+      <button class="pricing-cta" onclick="openModal()">微信预约</button>
+    </div>
+
+    <!-- Dog Card -->
+    <div class="pricing-card">
+      <h3 style="display:flex;align-items:center;gap:10px;">
+        <img src="dog.png" alt="狗狗图标" style="width:36px;height:36px;object-fit:contain;background:none;mix-blend-mode:multiply;image-rendering:crisp-edges;">
+        修勾上门
+      </h3>
+      <div class="price-row">
+        <span class="price-amount">¥40</span>
+        <span class="price-unit">起 / 次</span>
+      </div>
+      <div class="price-distance">
+        3公里内 <strong>¥40</strong><br>
+        3-5公里 <strong>¥50</strong><br>
+        5-6公里 <strong>¥60</strong><br>
+        加一只狗 <strong>+¥10</strong>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          喂水、喂食
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          清洁、遛（20mins左右）
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3 3 7-7" stroke="#B8C8A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          拍照&amp;视频
+        </div>
+      </div>
+      <button class="pricing-cta" onclick="openModal()">微信预约</button>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section 图片路径已修正 -->
+<section class="section reviews-section section-centered">
+  <span class="section-label">客户评价</span>
+  <h2 class="section-title">来自微信的真实反馈</h2>
+  <div class="review-cards">
+    <div class="review-card">
+      <img src="review1.png" onerror="this.style.display='none'">
+    </div>
+    <div class="review-card">
+      <img src="review2.png" onerror="this.style.display='none'">
+    </div>
+    <div class="review-card">
+      <img src="review3.png" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-main">
+    <span class="footer-tagline">温柔对待每个毛孩子</span>
+    <span class="footer-copyright">&copy; 2026 没带咖啡豆. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- WeChat QR Modal 适配图片qr.jpg -->
+<div class="modal-overlay" id="qrModal" onclick="closeModalOutside(event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <h3 class="modal-title">添加微信</h3>
+    <div class="modal-qr-frame">
+      <img src="qr.jpg">
+    </div>
+    <p class="modal-hint">使用微信扫一扫，加我为好友</p>
+    <button class="modal-close" onclick="closeModal()">关闭</button>
+  </div>
+</div>
+
+<script>
+function openModal() { document.getElementById('qrModal').classList.add('active'); }
+function closeModal() { document.getElementById('qrModal').classList.remove('active'); }
+function closeModalOutside(e) { if (e.target === e.currentTarget) closeModal(); }
+
+/* ===== Pet Cursor Switch (click to toggle cat <-> dog) ===== */
+(function(){
+  let isCat = true;
+  document.addEventListener('mousedown', function(e){
+    if (e.button !== 0) return;
+    isCat = !isCat;
+    document.body.classList.toggle('cursor-dog', !isCat);
+  });
+})();
+</script>
+
+</body>
+</html>
